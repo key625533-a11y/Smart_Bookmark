@@ -59,7 +59,6 @@ Sign in securely with your Google account - no passwords to remember!
 - **Supabase**: Updated the **Site URL** and **Redirect URLs** in the Supabase Auth settings to match the Vercel deployment URL (`https://smart-bookmark-steel-nine.vercel.app`).
 - **Google Cloud**: Ensured the **Authorized redirect URIs** included the Supabase project callback URL (`https://tqxiobugnyhbrgertarw.supabase.co/auth/v1/callback`).
 
-- 
 ### 2. Duplicate Real-time Updates
 **Problem**: When adding a bookmark, the UI would sometimes show the same bookmark twice—once from the local optimistic update and once from the real-time Supabase subscription.
 
