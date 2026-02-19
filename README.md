@@ -67,3 +67,4 @@ Sign in securely with your Google account - no passwords to remember!
 ### 3. Stale Data on Window Focus
 **Problem**: If a user left the app open in a background tab for a long time, the real-time connection could sometimes drop, leading to stale data when they returned to the app.
 
+**Solution**: Added a `window` focus event listener that triggers a fresh fetch of the bookmarks whenever the user returns to the tab. This acts as a "catch-up" mechanism to ensure the UI is always up to date.
