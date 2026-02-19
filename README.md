@@ -46,3 +46,25 @@ Your bookmarks are completely private. Row Level Security (RLS) ensures you can 
 
 ### Google Authentication
 Sign in securely with your Google account - no passwords to remember!
+
+
+
+
+## Challenges Faced & Solutions
+
+### 1. Authentication Redirect to Localhost on Vercel
+**Problem**: After deploying to Vercel, signing in with Google would often redirect the user back to `localhost:3000` instead of the production Vercel URL, causing a "Site cannot be reached" error.
+
+**Solution**: This was identified as a configuration mismatch between the app's environment and the authorized redirect URIs in Supabase and Google Cloud Console.
+- **Supabase**: Updated the **Site URL** and **Redirect URLs** in the Supabase Auth settings to match the Vercel deployment URL (`https://smart-bookmark-steel-nine.vercel.app`).
+- **Google Cloud**: Ensured the **Authorized redirect URIs** included the Supabase project callback URL (`https://tqxiobugnyhbrgertarw.supabase.co/auth/v1/callback`).
+
+- 
+### 2. Duplicate Real-time Updates
+**Problem**: When adding a bookmark, the UI would sometimes show the same bookmark twice—once from the local optimistic update and once from the real-time Supabase subscription.
+
+**Solution**: Implemented a check in the real-time subscription listener to see if the incoming bookmark ID already exists in the local state. This ensures that the UI only reflects the change once, keeping the list clean and accurate.
+
+### 3. Stale Data on Window Focus
+**Problem**: If a user left the app open in a background tab for a long time, the real-time connection could sometimes drop, leading to stale data when they returned to the app.
+
